@@ -14,6 +14,7 @@
     <p>{{i.price}}</p>
     <h2>{{i.link}}</h2>
     <a href="{%url 'detail' i.id%}">Деталі ігри</a>
+    <a href="{% url 'update' i.id %}">Оновити гру</a>
     <a href="{%url 'delete' i.id%}">Видалити гру</a>
     {% endfor %}
 </body>

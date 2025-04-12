@@ -26,3 +26,10 @@ def delete_game(request,id_game):
 def detail(request,id_product):
     game = Game.objects.get(id =id_product)
     return render(request,'detail.html',{'game':game})
+def update_game(request,id_game):
+    game = Game.objects.get(id = id_game) 
+    form = GameForm(request.POST,instance = game)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    return render(request,'update.html',{'form':form})
