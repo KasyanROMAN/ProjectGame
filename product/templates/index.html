@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>список товарів</h1>
+    <a href="{%url 'create'%}">Додати товар</a>
     {% for i in games  %}
     <h1>{{i.name}}</h1>
     <h3>{{i.descriptions}}</h3>
