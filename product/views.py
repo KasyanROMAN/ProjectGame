@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from django.http import HttpResponse
 from product.forms import GameForm
 from product.models import Game
 
@@ -16,3 +16,13 @@ def create_game(request):
     else:
         form = GameForm()
     return render(request, 'create.html', {'form':form})
+def delete_game(request,id_game):
+    try:
+        game = Game.objects.get(id = id_game)
+        game.delete()
+        return redirect('/')
+    except Game.DoesNotExist:
+        return HttpResponse('Error')
+def detail(request,id_product):
+    game = Game.objects.get(id =id_product)
+    return render(request,'detail.html',{'game':game})
