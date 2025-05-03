@@ -1,21 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список ігор</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 1rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      color: #2563eb;
+      font-size: 2.5rem;
+    }
+
+    .add-button {
+      background-color: #10b981;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    .add-button:hover {
+      background-color: #059669;
+    }
+
+    .card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      margin: 0 0 0.5rem 0;
+      color: #111827;
+    }
+
+    .card h3 {
+      margin: 0 0 0.5rem 0;
+      color: #374151;
+    }
+
+    .card p {
+      margin: 0 0 0.8rem 0;
+      color: #6b7280;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-right: 0.8rem;
+      margin-top: 0.5rem;
+      text-decoration: none;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .detail {
+      background-color: #3b82f6;
+    }
+
+    .update {
+      background-color: #f59e0b;
+    }
+
+    .delete {
+      background-color: #ef4444;
+    }
+
+    .card a:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
-    <h1>Список товарів</h1>
-    <a href="{%url 'create'%}">Додати товар</a>
-    {% for i in games  %}
-    <h1>{{i.name}}</h1>
-    <h3>{{i.descriptions}}</h3>
-    <p>{{i.price}}</p>
-    <h2>{{i.link}}</h2>
-    <a href="{%url 'detail' i.id%}">Деталі ігри</a>
-    <a href="{% url 'update' i.id %}">Оновити гру</a>
-    <a href="{%url 'delete' i.id%}">Видалити гру</a>
+  <div class="container">
+    <div class="header">
+      <h1>Список ігор</h1>
+      <a href="{% url 'create' %}" class="add-button">➕ Додати гру</a>
+    </div>
+
+    {% for i in games %}
+      <div class="card">
+        <h2>{{ i.name }}</h2>
+        <h3>{{ i.descriptions }}</h3>
+        <p>💰 {{ i.price }} грн</p>
+        <p>🔗 <a href="{{ i.link }}" target="_blank">{{ i.link }}</a></p>
+        <a href="{% url 'detail' i.id %}" class="detail">Деталі</a>
+        <a href="{% url 'update' i.id %}" class="update">Оновити</a>
+        <a href="{% url 'delete' i.id %}" class="delete">Видалити</a>
+      </div>
+    {% empty %}
+      <p>Ігор поки що немає.</p>
     {% endfor %}
+  </div>
 </body>
 </html>
